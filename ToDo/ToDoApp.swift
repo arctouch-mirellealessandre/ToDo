@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct ToDoApp: App {
+	@StateObject var userManager = UserManager()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+			if userManager.userState == .authorized {
+				ContentView()
+			} else {
+				LoginView(userManager: userManager)
+			}
         }
     }
 }
