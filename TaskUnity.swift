@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct TaskUnity {
-	let dueDate: String
-	let description: String
-	let id: String
-	let completed: Bool
-}
+//struct TaskUnity {
+//	let dueDate: String
+//	let description: String
+//	let id: String
+//	let isCompleted: Bool
+//}

@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct ToDoApp: App {
+	
 	@StateObject var userManager = UserManager()
-
+	
     var body: some Scene {
         WindowGroup {
 			if userManager.userState == .authorized {
-				ContentView()
+				MainView()
 			} else {
 				LoginView(userManager: userManager)
 			}
