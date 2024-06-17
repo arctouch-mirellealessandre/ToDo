@@ -7,26 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		700B863D2BF448360035830C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700B863C2BF448360035830C /* User.swift */; };
 		70A298AE2BED1941008C9A37 /* ToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A298AD2BED1941008C9A37 /* ToDoApp.swift */; };
 		70A298B22BED1944008C9A37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A298B12BED1944008C9A37 /* Assets.xcassets */; };
 		70A298B52BED1944008C9A37 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A298B42BED1944008C9A37 /* Preview Assets.xcassets */; };
-		70B9FAA82BF2446800C2C712 /* LoginPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9FAA72BF2446800C2C712 /* LoginPostRequest.swift */; };
 		70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BAF9442BFF65E70073AA23 /* LoginView.swift */; };
-		70C169512C0DF213005CCC6C /* TaskUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C169502C0DF213005CCC6C /* TaskUnity.swift */; };
-		70C169532C0DF22A005CCC6C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C169522C0DF22A005CCC6C /* MainView.swift */; };
+		70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C169522C0DF22A005CCC6C /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		700B863C2BF448360035830C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		70A298AA2BED1941008C9A37 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A298AD2BED1941008C9A37 /* ToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoApp.swift; sourceTree = "<group>"; };
 		70A298B12BED1944008C9A37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70A298B42BED1944008C9A37 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		70B9FAA72BF2446800C2C712 /* LoginPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPostRequest.swift; sourceTree = "<group>"; };
 		70BAF9442BFF65E70073AA23 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		70C169502C0DF213005CCC6C /* TaskUnity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskUnity.swift; sourceTree = "<group>"; };
-		70C169522C0DF22A005CCC6C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		70C169522C0DF22A005CCC6C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		70CA107E2BFE339000366891 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,8 +75,6 @@
 		70BAF9432BFF65980073AA23 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				70B9FAA72BF2446800C2C712 /* LoginPostRequest.swift */,
-				700B863C2BF448360035830C /* User.swift */,
 				70BAF9442BFF65E70073AA23 /* LoginView.swift */,
 			);
 			path = Login;
@@ -91,8 +83,7 @@
 		70C169542C0DF24E005CCC6C /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				70C169502C0DF213005CCC6C /* TaskUnity.swift */,
-				70C169522C0DF22A005CCC6C /* MainView.swift */,
+				70C169522C0DF22A005CCC6C /* HomeView.swift */,
 			);
 			name = MainView;
 			path = ..;
@@ -168,10 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70C169512C0DF213005CCC6C /* TaskUnity.swift in Sources */,
-				70C169532C0DF22A005CCC6C /* MainView.swift in Sources */,
-				700B863D2BF448360035830C /* User.swift in Sources */,
-				70B9FAA82BF2446800C2C712 /* LoginPostRequest.swift in Sources */,
+				70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */,
 				70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */,
 				70A298AE2BED1941008C9A37 /* ToDoApp.swift in Sources */,
 			);
