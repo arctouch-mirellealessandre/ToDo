@@ -29,17 +29,14 @@ final class HomeViewModel: ObservableObject {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks"), let user = userManager.user else {
 			return []
 		}
-		
 		let token = user.token
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
 		request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
-
 		// URLSession.shared.data(for:) -> (Data, URLResponse)?, por isso o try! (ajeitar pra funcionar sem o force unwrapp)
-		let (data, response) = try! await URLSession.shared.data(for: request)
-		
+		let (data, _) = try! await URLSession.shared.data(for: request)
 		let tasks = try! JSONDecoder().decode([TaskUnity].self, from: data)
 		return tasks
 	}
