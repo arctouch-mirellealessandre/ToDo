@@ -23,7 +23,6 @@ final class HomeViewModel: ObservableObject {
 	init(userManager: UserManager) {
 		self.userManager = userManager
 	}
-	
 
 	func requestTasks() async throws -> [TaskUnity] {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks"), let user = userManager.user else {
@@ -45,34 +44,43 @@ final class HomeViewModel: ObservableObject {
 //MARK: View
 struct HomeView: View {
 	@ObservedObject var viewModel: HomeViewModel
-		
+	
 	init(viewModel: HomeViewModel) {
 		self.viewModel = viewModel
 	}
 	
 	var body: some View {
-		VStack {
-			Text("All My Tasks")
-				.font(.title)
-				.bold()
-				.padding()
-				.task {
-					do {
-						viewModel.tasks = try await viewModel.requestTasks()
-					} catch {
-						print("error")
+		NavigationStack {
+			VStack {
+				Text("All My Tasks")
+					.font(.title)
+					.bold()
+					.padding()
+					.task {
+						do {
+							viewModel.tasks = try await viewModel.requestTasks()
+						} catch {
+							print("error")
+						}
+					}
+				List {
+					ForEach(viewModel.tasks, id: \.id) { task in
+						TaskListRowView(task: task)
 					}
 				}
-			List {
-				ForEach(viewModel.tasks, id: \.id) { task in
-					TaskListRowView(task: task)
-				}
 			}
+			
+			NavigationLink(destination: {
+				AddTaskView() // your view that you want to navigate to
+			}, label: {
+				Text("Add New Task")
+			})
+			.buttonStyle(.borderedProminent) // <- important line
 		}
-		Spacer()
+		.navigationTitle("All My Tasks")
 	}
 }
-	
+
 struct TaskListRowView: View {
 	@State var task: TaskUnity
 	
