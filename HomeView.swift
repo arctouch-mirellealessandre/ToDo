@@ -34,11 +34,14 @@ final class HomeViewModel: ObservableObject {
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.addValue("application/json", forHTTPHeaderField: "Accept")
 		request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
-		// URLSession.shared.data(for:) -> (Data, URLResponse)?, por isso o try! (ajeitar pra funcionar sem o force unwrapp)
 		let (data, _) = try! await URLSession.shared.data(for: request)
 		let tasks = try! JSONDecoder().decode([TaskUnity].self, from: data)
 		return tasks
 	}
+	
+	func fetchTasks() async {
+	}
+	
 }
 
 //MARK: View
@@ -52,32 +55,27 @@ struct HomeView: View {
 	var body: some View {
 		NavigationStack {
 			VStack {
-				Text("All My Tasks")
-					.font(.title)
-					.bold()
-					.padding()
-					.task {
-						do {
-							viewModel.tasks = try await viewModel.requestTasks()
-						} catch {
-							print("error")
-						}
-					}
 				List {
 					ForEach(viewModel.tasks, id: \.id) { task in
 						TaskListRowView(task: task)
 					}
 				}
 			}
-			
 			NavigationLink(destination: {
-				AddTaskView() // your view that you want to navigate to
+				AddTaskView()
 			}, label: {
 				Text("Add New Task")
 			})
-			.buttonStyle(.borderedProminent) // <- important line
+			.buttonStyle(.borderedProminent)
 		}
 		.navigationTitle("All My Tasks")
+		.task {
+			do {
+				viewModel.tasks = try await viewModel.requestTasks()
+			} catch {
+				print("Couldn't request tasks")
+			}
+		}
 	}
 }
 
