@@ -72,17 +72,23 @@ struct LoginView: View {
 				.bold()
 				.font(.largeTitle)
 			Form {
-				TextField("Username", text: $username)
-					.textInputAutocapitalization(.never)
-				TextField("Password", text: $password)
-					.textInputAutocapitalization(.never)
+				Section() {
+					TextField("", text: $username)
+						.textInputAutocapitalization(.never)
+				} header: {
+					Text("Username")
 				}
-			Button {
+				Section() {
+					TextField("", text: $password)
+						.textInputAutocapitalization(.never)
+				} header: {
+					 Text("Password")
+				}
+			}
+			Button("Login") {
 				Task {
 					_ = try await loginViewModel.postLoginRequest(username: username, password: password)
 				}
-			} label: {
-				Text("Login")
 			}
 		}
 	}
