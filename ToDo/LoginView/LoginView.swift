@@ -90,6 +90,7 @@ struct LoginView: View {
 					_ = try await loginViewModel.postLoginRequest(username: username, password: password)
 				}
 			}
+			.buttonStyle(.borderedProminent)
 		}
 	}
 }
