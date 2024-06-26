@@ -26,16 +26,15 @@ struct AddTaskView: View {
 				} header: {
 					Text("Due Date")
 				}
-				Section {
-					Button("Add Task") {
-							//add task to tasks array
-						}
-					.frame(maxWidth: .infinity, alignment: .center)
-				}
+			}
+			Button("Add Task") {
+				//add task to tasks array
+			}
+			.buttonStyle(.borderedProminent)
 			}
 		}
-	}
 }
+		
 
 #Preview {
 	AddTaskView()
