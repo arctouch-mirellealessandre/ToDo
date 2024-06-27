@@ -11,19 +11,19 @@ import SwiftUI
 struct ToDoApp: App {
 	@ObservedObject var userManager: UserManager
 	@ObservedObject var loginViewModel: LoginViewModel
-	@ObservedObject var mainViewModel: HomeViewModel
+	@ObservedObject var homeViewModel: HomeViewModel
 
 	init() {
 		let userManager = UserManager()
 		self.userManager = userManager
 		self.loginViewModel = LoginViewModel(userManager: userManager)
-		self.mainViewModel = HomeViewModel(userManager: userManager)
+		self.homeViewModel = HomeViewModel(userManager: userManager)
 	}
 		
 	var body: some Scene {
 		WindowGroup {
 			if userManager.userState == .authorized {
-				HomeView(viewModel: mainViewModel)
+				HomeView(viewModel: homeViewModel)
 			} else {
 				LoginView(loginViewModel: loginViewModel)
 			}
