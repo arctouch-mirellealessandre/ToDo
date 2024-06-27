@@ -38,10 +38,6 @@ final class HomeViewModel: ObservableObject {
 		let tasks = try! JSONDecoder().decode([TaskUnity].self, from: data)
 		return tasks
 	}
-	
-	func fetchTasks() async {
-	}
-	
 }
 
 //MARK: View
@@ -62,7 +58,7 @@ struct HomeView: View {
 				}
 			}
 			NavigationLink(destination: {
-				AddTaskView()
+				AddTaskView(viewModel: AddTaskViewModel(userManager: viewModel.userManager))
 			}, label: {
 				Text("Add New Task")
 			})
