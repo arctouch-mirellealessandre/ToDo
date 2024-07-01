@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  HomeView.swift
 //  ToDo
 //
 //  Created by Mirelle Alessandre on 03/06/24.
@@ -28,49 +28,52 @@ final class HomeViewModel: ObservableObject {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks"), let user = userManager.user else {
 			return []
 		}
+		
 		let token = user.token
+		
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
 		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-		request.addValue("application/json", forHTTPHeaderField: "Accept")
 		request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
+		
 		let (data, _) = try! await URLSession.shared.data(for: request)
 		let tasks = try! JSONDecoder().decode([TaskUnity].self, from: data)
+		
 		return tasks
 	}
 }
 
 //MARK: View
 struct HomeView: View {
-	@ObservedObject var viewModel: HomeViewModel
+	@ObservedObject var homeViewModel: HomeViewModel
 	
 	init(viewModel: HomeViewModel) {
-		self.viewModel = viewModel
+		self.homeViewModel = viewModel
 	}
 	
 	var body: some View {
 		NavigationStack {
 			VStack {
 				List {
-					ForEach(viewModel.tasks, id: \.id) { task in
+					ForEach(homeViewModel.tasks, id: \.id) { task in
 						TaskListRowView(task: task)
 					}
 				}
 			}
 			NavigationLink(destination: {
-				AddTaskView(viewModel: AddTaskViewModel(userManager: viewModel.userManager))
+				AddTaskView(viewModel: AddTaskViewModel(userManager: homeViewModel.userManager, tasks: homeViewModel.tasks))
 			}, label: {
 				Text("Add New Task")
 			})
 			.buttonStyle(.borderedProminent)
-		}
-		.navigationTitle("All My Tasks")
-		.task {
-			do {
-				viewModel.tasks = try await viewModel.requestTasks()
-			} catch {
-				print("Couldn't request tasks")
+			.task {
+				do {
+					homeViewModel.tasks = try await homeViewModel.requestTasks()
+				} catch {
+					print("Couldn't request tasks")
+				}
 			}
+			.navigationTitle("All My Tasks")
 		}
 	}
 }
