@@ -23,7 +23,7 @@ final class UserManager: ObservableObject {
 
 final class LoginViewModel: ObservableObject {
 	private var userManager: UserManager
-	private var user: User?
+	var user: User?
 	
 	init(userManager: UserManager) {
 		self.userManager = userManager
@@ -71,6 +71,8 @@ struct LoginView: View {
 			Text("Login")
 				.bold()
 				.font(.largeTitle)
+		}
+		ZStack {
 			Form {
 				Section() {
 					TextField("", text: $username)
@@ -87,10 +89,15 @@ struct LoginView: View {
 			}
 			Button("Login") {
 				Task {
-					_ = try await loginViewModel.postLoginRequest(username: username, password: password)
+					do {
+						loginViewModel.user = try await loginViewModel.postLoginRequest(username: username, password: password)
+					} catch {
+						print("Login attempt failed.")
+					}
 				}
 			}
 			.buttonStyle(.borderedProminent)
+			.offset(x: 0, y: -100)
 		}
 	}
 }
