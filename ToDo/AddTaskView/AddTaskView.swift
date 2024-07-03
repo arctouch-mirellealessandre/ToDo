@@ -32,7 +32,7 @@ class AddTaskViewModel: ObservableObject {
 		}
 		
 		let token = user.token
-		let newTask = NewTask(description: description, dueDate: dateFormatter(dueDate))
+		let newTask = NewTask(description: description, dueDate: jsonDateFormatter(dueDate))
 		
 		guard let jsonData = try? JSONEncoder().encode(newTask) else {
 			print("Error: Trying to convert newTask into JSON Data")
@@ -50,22 +50,16 @@ class AddTaskViewModel: ObservableObject {
 		print("Task: \(task)")
 		tasks.append(task)
 	}
-	
-	func dateFormatter(_ stringDate: String) -> String {
-		//stringDate: string -> date: date.Format = "yyyy-MM-dd'T'HH:mm:ssZ"
-		
-		//string -> date
+			
+	func jsonDateFormatter(_ stringDate: String) -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "dd/MM/yy"
 		let date = dateFormatter.date(from: stringDate)
-		
-		//date -> iso8601
 		let isoFormatter = ISO8601DateFormatter()
 		isoFormatter.formatOptions = [.withInternetDateTime]
 		let isoDate = isoFormatter.string(from: date!)
 		return isoDate
 	}
-	
 }
 
 enum AddTask: Error {
