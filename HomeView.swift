@@ -15,6 +15,18 @@ struct TaskUnity: Codable {
 	var completed: Bool
 }
 
+extension TaskUnity {
+	func userDateFormatter() -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+		let date = dateFormatter.date(from: self.dueDate)
+		let isoFormatter = ISO8601DateFormatter()
+		isoFormatter.formatOptions = [.withFullDate]
+		let isoDate = isoFormatter.string(from: date!)
+		return isoDate
+	}
+}
+
 //MARK: ViewModel
 final class HomeViewModel: ObservableObject {
 	@Published var tasks = [TaskUnity]()
@@ -73,7 +85,14 @@ struct HomeView: View {
 					print("Couldn't request tasks")
 				}
 			}
-			.navigationTitle("All My Tasks")
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .principal) {
+					Text("All My Tasks")
+						.font(.largeTitle.bold())
+						.accessibilityAddTraits(.isHeader)
+				}
+			}
 		}
 	}
 }
@@ -99,7 +118,7 @@ struct TaskListRowView: View {
 						task.completed.toggle()
 					}
 			}
-			Text("Due on: \(task.dueDate)")
+			Text("Due on \(task.userDateFormatter())")
 		})
 		.padding()
 	}
