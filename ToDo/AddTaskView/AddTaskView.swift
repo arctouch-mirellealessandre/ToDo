@@ -87,9 +87,11 @@ struct AddTaskView: View {
 	
 	var body: some View {
 		VStack(alignment: .center) {
-			Text("Add Task")
+			Text("Add New Task")
 				.bold()
 				.font(.system(size: 25))
+		}
+		ZStack() {
 			Form {
 				Section {
 					TextField("Description", text: $description)
@@ -114,6 +116,7 @@ struct AddTaskView: View {
 				Text("Add Task")
 			}
 			.buttonStyle(.borderedProminent)
+			.offset(x: 0, y: -100)
 		}
 	}
 }
