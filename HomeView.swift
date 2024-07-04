@@ -118,7 +118,14 @@ struct TaskListRowView: View {
 						task.completed.toggle()
 					}
 			}
-			Text("Due on \(task.userDateFormatter())")
+			HStack {
+				Text("Due on \(task.userDateFormatter())")
+				Spacer()
+				Image(systemName: "xmark.bin.circle.fill")
+					.foregroundStyle(.gray)
+					.font(.system(size: 22))
+			}
+			.offset(x: 0, y: 10)
 		})
 		.padding()
 	}
