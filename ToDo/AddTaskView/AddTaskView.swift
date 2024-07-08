@@ -1,85 +1,34 @@
 import SwiftUI
 
-struct NewTask: Codable {
-	let description: String
-	let dueDate: String
-	
-	init(description: String, dueDate: String) {
-		self.description = description
-		self.dueDate = dueDate
-	}
-}
-
 //MARK: ViewModel
+@MainActor
 class AddTaskViewModel: ObservableObject {
-	private var userManager: UserManager
-	private var tasks: [TaskUnity]
+	var taskService: TaskService
 	
-	init(userManager: UserManager, tasks: [TaskUnity]) {
-		self.userManager = userManager
-		self.tasks = tasks
+	init(taskService: TaskService) {
+		self.taskService = taskService
 	}
 	
-	func addNewTask(description: String, dueDate: String) async throws {
-		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks") else {
-			print("Error: Invalid URL")
-			return
+	func addNewTask(_ description: String, _ dueDate: String) {
+		Task {
+			do {
+				try await taskService.addNewTask(description: description, dueDate: dueDate)
+			} catch {
+				print("Error: couldn't add new task")
+			}
 		}
-		
-		guard let user = userManager.user else {
-			print("Error: Invalid User")
-			return
-		}
-		
-		let token = user.token
-		let newTask = NewTask(description: description, dueDate: jsonDateFormatter(dueDate))
-		
-		guard let jsonData = try? JSONEncoder().encode(newTask) else {
-			print("Error: Trying to convert newTask into JSON Data")
-			return
-		}
-		
-		var request = URLRequest(url: url)
-		request.httpMethod = "POST"
-		request.httpBody = jsonData
-		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-		request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-		
-		let (data, _) = try! await URLSession.shared.data(for: request)
-		let task = try! JSONDecoder().decode(TaskUnity.self, from: data)
-		print("Task: \(task)")
-		tasks.append(task)
 	}
-			
-	func jsonDateFormatter(_ stringDate: String) -> String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yy"
-		let date = dateFormatter.date(from: stringDate)
-		let isoFormatter = ISO8601DateFormatter()
-		isoFormatter.formatOptions = [.withInternetDateTime]
-		let isoDate = isoFormatter.string(from: date!)
-		return isoDate
-	}
-}
-
-enum AddTask: Error {
-	case invalidURL
-	case invalidResponse
-	case invalidData
-	case invalidUser
-	case encodingNewTask
 }
 
 //MARK: View
 struct AddTaskView: View {
+	@ObservedObject var addTaskViewModel: AddTaskViewModel
 	@State var description: String
 	@State var dueDate: String
-	
-	@ObservedObject var addTaskViewModel: AddTaskViewModel
-	
+		
 	init(viewModel: AddTaskViewModel) {
-		let description = "Water the plants"
-		let dueDate = "25-11-2024"
+		let description = ""
+		let dueDate = ""
 		self.addTaskViewModel = viewModel
 		self.description = description
 		self.dueDate = dueDate
@@ -105,13 +54,7 @@ struct AddTaskView: View {
 				}
 			}
 			Button {
-				Task {
-					do {
-						try await addTaskViewModel.addNewTask(description: description, dueDate: dueDate)
-					} catch {
-						print("Error: couldn't add new task")
-					}
-				}
+				addTaskViewModel.addNewTask(description, dueDate)
 			} label: {
 				Text("Add Task")
 			}
