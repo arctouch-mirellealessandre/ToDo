@@ -31,7 +31,8 @@ final class HomeViewModel: ObservableObject {
 	func deleteTask(_ task: TaskUnity) {
 		Task {
 			do {
-				try await taskService.deleteTask(task.id)
+				var deletedTask = try await taskService.deleteTask(with: task.id)
+				tasks.remove(at: tasks.firstIndex(of: deletedTask)!)
 			} catch {
 				print("TaskListRowView: couldn't deleteTask")
 			}

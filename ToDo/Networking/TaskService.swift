@@ -18,7 +18,6 @@ enum TaskServiceError: Error {
 @MainActor
 final class TaskService: ObservableObject {
 	var userManager: UserManager
-	@Published var tasks = [TaskUnity]()
 	
 	init(userManager: UserManager) {
 		self.userManager = userManager
@@ -65,11 +64,9 @@ final class TaskService: ObservableObject {
 		request.httpBody = jsonData
 		let (data, _) = try! await URLSession.shared.data(for: request)
 		let task = try! JSONDecoder().decode(TaskUnity.self, from: data)
-		print("Task: \(task)")
-		tasks.append(task)
 	}
 				
-	func deleteTask(_ id: String) async throws {
+	func deleteTask(with id: String) async throws -> TaskUnity {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks/" + "\(id)") else {
 			throw TaskServiceError.invalidURL
 		}
@@ -78,12 +75,8 @@ final class TaskService: ObservableObject {
 		request.httpMethod = "DELETE"
 		let (data, _) = try! await URLSession.shared.data(for: request)
 		
-		let deletedTask = try? JSONDecoder().decode(TaskUnity.self, from: data)
-//		{
-//			tasks.remove(at: tasks.firstIndex(of: deletedTask)!)
-//		} else {
-//			print(String(decoding: data, as: UTF8.self))
-//		}
+		let deletedTask = try! JSONDecoder().decode(TaskUnity.self, from: data)
+		return deletedTask
 	}
 	
 	func jsonDateFormatter(_ stringDate: String) -> String {
