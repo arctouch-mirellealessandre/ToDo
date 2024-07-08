@@ -7,52 +7,37 @@
 
 import SwiftUI
 
-//MARK: Model
-struct TaskUnity: Codable {
-	var dueDate: String
-	var description: String
-	let id: String
-	var completed: Bool
-}
-
-extension TaskUnity {
-	func userDateFormatter() -> String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-		let date = dateFormatter.date(from: self.dueDate)
-		let isoFormatter = ISO8601DateFormatter()
-		isoFormatter.formatOptions = [.withFullDate]
-		let isoDate = isoFormatter.string(from: date!)
-		return isoDate
-	}
-}
-
 //MARK: ViewModel
+@MainActor
 final class HomeViewModel: ObservableObject {
 	@Published var tasks = [TaskUnity]()
-	var userManager: UserManager
+	
+	var taskService: TaskService
 		
-	init(userManager: UserManager) {
-		self.userManager = userManager
+	init(taskService: TaskService) {
+		self.taskService = taskService
 	}
-
-	func requestTasks() async throws -> [TaskUnity] {
-		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks"), let user = userManager.user else {
-			return []
+	
+	func requestTasks() {
+		Task {
+			do {
+				tasks = try await taskService.requestTasks()
+			} catch {
+				print("Couldn't request tasks")
+			}
 		}
-		
-		let token = user.token
-		
-		var request = URLRequest(url: url)
-		request.httpMethod = "GET"
-		request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-		request.setValue( "Bearer \(token)", forHTTPHeaderField: "Authorization")
-		
-		let (data, _) = try! await URLSession.shared.data(for: request)
-		let tasks = try! JSONDecoder().decode([TaskUnity].self, from: data)
-		
-		return tasks
 	}
+	
+	func deleteTask(_ task: TaskUnity) {
+		Task {
+			do {
+				try await taskService.deleteTask(task.id)
+			} catch {
+				print("TaskListRowView: couldn't deleteTask")
+			}
+		}
+	}
+	
 }
 
 //MARK: View
@@ -68,22 +53,18 @@ struct HomeView: View {
 			VStack {
 				List {
 					ForEach(homeViewModel.tasks, id: \.id) { task in
-						TaskListRowView(task: task)
+						TaskListRowView(task: task, homeViewModel: homeViewModel)
 					}
 				}
 			}
 			NavigationLink(destination: {
-				AddTaskView(viewModel: AddTaskViewModel(userManager: homeViewModel.userManager, tasks: homeViewModel.tasks))
+				AddTaskView(viewModel: AddTaskViewModel(taskService: homeViewModel.taskService))
 			}, label: {
 				Text("Add New Task")
 			})
 			.buttonStyle(.borderedProminent)
 			.task {
-				do {
-					homeViewModel.tasks = try await homeViewModel.requestTasks()
-				} catch {
-					print("Couldn't request tasks")
-				}
+				homeViewModel.requestTasks()
 			}
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
@@ -97,11 +78,13 @@ struct HomeView: View {
 	}
 }
 
-struct TaskListRowView: View {
+private struct TaskListRowView: View {
 	@State var task: TaskUnity
+	@ObservedObject var homeViewModel: HomeViewModel
 	
-	init(task: TaskUnity) {
+	init(task: TaskUnity, homeViewModel: HomeViewModel) {
 		self.task = task
+		self.homeViewModel = homeViewModel
 	}
 	
 	var body: some View {
@@ -121,9 +104,13 @@ struct TaskListRowView: View {
 			HStack {
 				Text("Due on \(task.userDateFormatter())")
 				Spacer()
-				Image(systemName: "xmark.bin.circle.fill")
-					.foregroundStyle(.gray)
-					.font(.system(size: 22))
+				Button {
+					homeViewModel.deleteTask(task)
+				} label: {
+					Image(systemName: "xmark.bin.circle.fill")
+						.foregroundStyle(.red)
+						.font(.system(size: 22))
+				}
 			}
 			.offset(x: 0, y: 10)
 		})
@@ -131,6 +118,6 @@ struct TaskListRowView: View {
 	}
 }
 
-#Preview {
-	HomeView(viewModel: HomeViewModel(userManager: UserManager()))
-}
+//#Preview {
+//	HomeView(viewModel: HomeViewModel(taskService: TaskService())
+//}
