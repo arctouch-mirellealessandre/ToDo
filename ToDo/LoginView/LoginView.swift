@@ -7,65 +7,61 @@
 
 import SwiftUI
 
-struct User: Codable {
-	var firstName: String
-	var email: String
-	var username: String
-	var id: String
-	var lastName: String
-	var token: String
+enum LoginRequest: Error {
+	case invalidURL
+	case invalidResponse
 }
 
-final class UserManager: ObservableObject {
-	@Published var userState: UserState = .none
-	@Published var user: User?
-}
-
+@MainActor
 final class LoginViewModel: ObservableObject {
 	private var userManager: UserManager
-	var user: User?
 	
 	init(userManager: UserManager) {
 		self.userManager = userManager
-		self.user = nil
 	}
 	
-	func postLoginRequest(username: String, password: String) async throws -> User? {
+	func postLoginRequest(_ username: String, _ password: String) async throws {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/users/login") else {
 			throw LoginRequest.invalidURL
 		}
 		
 		var request = URLRequest(url: url)
 		request.httpMethod = "POST"
-		
 		let basicAuth = (username + ":" + password).data(using: .utf8)!.base64EncodedString()
 		request.addValue("Basic \(basicAuth)", forHTTPHeaderField: "Authorization")
-		
 		let (data, response) = try await URLSession.shared.data(for: request)
 		
 		guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
 			throw LoginRequest.invalidResponse
 		}
+		
+		userManager.user = try JSONDecoder().decode(User.self, from: data)
+		userManager.updateUserState()
+	}
 	
-		let user = try JSONDecoder().decode(User.self, from: data)
-		userManager.user = user
-		userManager.userState = .authorized
-		return user
+	func requestLogin(_ username: String, _ password: String) {
+		Task {
+			do {
+				try await postLoginRequest(username, password)
+			} catch {
+				print("Login attempt failed.")
+			}
+		}
+		
 	}
 }
 
 struct LoginView: View {
 	@State private var username: String
 	@State private var password: String
-	
-	@ObservedObject private var loginViewModel: LoginViewModel
-	
-	init(loginViewModel: LoginViewModel) {
+	@ObservedObject var loginViewModel: LoginViewModel
+
+	init(viewModel: LoginViewModel) {
 		self.username = "john.doe"
 		self.password = "123456789"
-		self.loginViewModel = loginViewModel
+		self.loginViewModel = viewModel
 	}
-	
+
 	var body: some View {
 		VStack {
 			Text("Login")
@@ -88,30 +84,14 @@ struct LoginView: View {
 				}
 			}
 			Button("Login") {
-				Task {
-					do {
-						loginViewModel.user = try await loginViewModel.postLoginRequest(username: username, password: password)
-					} catch {
-						print("Login attempt failed.")
-					}
+				loginViewModel.requestLogin(username, password)
 				}
-			}
 			.buttonStyle(.borderedProminent)
 			.offset(x: 0, y: -100)
+			}
 		}
-	}
 }
 
-enum LoginRequest: Error {
-	case invalidURL
-	case invalidResponse
-}
-
-enum UserState {
-	case none
-	case authorized
-}
-
-#Preview {
-	LoginView(loginViewModel: LoginViewModel(userManager: UserManager()))
-}
+//#Preview {
+//	LoginView(loginViewModel: LoginViewModel(userManager: UserManager()))
+//}
