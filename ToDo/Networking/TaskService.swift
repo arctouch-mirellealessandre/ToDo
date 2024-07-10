@@ -12,7 +12,8 @@ enum TaskServiceError: Error {
 	case invalidResponse
 	case invalidData
 	case invalidUser
-	case encodingNewTask
+	case invalidNewTask
+	case invalidDateFormat
 }
 
 @MainActor
@@ -25,7 +26,7 @@ final class TaskService: ObservableObject {
 		
 	var userToken: String {
 		guard let user = userManager.user else {
-			return "Invalid user"
+			return "Invalid user token"
 		}
 		return user.token
 	}
@@ -57,10 +58,10 @@ final class TaskService: ObservableObject {
 			throw TaskServiceError.invalidURL
 		}
 		
-		let newTask = NewTask(description: description, dueDate: jsonDateFormatter(dueDate))
+		let newTask = NewTask(description: description, dueDate: try jsonDateFormatter(dueDate))
 		
 		guard let jsonData = try? JSONEncoder().encode(newTask) else {
-			throw TaskServiceError.encodingNewTask
+			throw TaskServiceError.invalidNewTask
 		}
 		
 		var request = headersRequest(url)
@@ -90,14 +91,20 @@ final class TaskService: ObservableObject {
 		let deletedTask = try JSONDecoder().decode(TaskUnity.self, from: data)
 		return deletedTask
 	}
-	
-	func jsonDateFormatter(_ stringDate: String) -> String {
+}
+
+extension TaskService {
+	func jsonDateFormatter(_ stringDate: String) throws -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "dd/MM/yy"
-		let date = dateFormatter.date(from: stringDate)
+		
+		guard let date = dateFormatter.date(from: stringDate) else {
+			throw TaskServiceError.invalidDateFormat
+		}
+		
 		let isoFormatter = ISO8601DateFormatter()
 		isoFormatter.formatOptions = [.withInternetDateTime]
-		let isoDate = isoFormatter.string(from: date!)
+		let isoDate = isoFormatter.string(from: date)
 		return isoDate
 	}
 }
