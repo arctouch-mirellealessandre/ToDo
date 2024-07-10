@@ -52,7 +52,7 @@ final class TaskService: ObservableObject {
 		return tasks
 	}
 	
-	func addNewTask(description: String, dueDate: String) async throws {
+	func addNewTask(description: String, dueDate: String) async throws -> TaskUnity {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks") else {
 			throw TaskServiceError.invalidURL
 		}
@@ -60,14 +60,19 @@ final class TaskService: ObservableObject {
 		let newTask = NewTask(description: description, dueDate: jsonDateFormatter(dueDate))
 		
 		guard let jsonData = try? JSONEncoder().encode(newTask) else {
-			print("Error: Trying to convert newTask into JSON Data")
-			return
+			throw TaskServiceError.encodingNewTask
 		}
+		
 		var request = headersRequest(url)
 		request.httpMethod = "POST"
 		request.httpBody = jsonData
-		let (data, _) = try! await URLSession.shared.data(for: request)
-		let task = try! JSONDecoder().decode(TaskUnity.self, from: data)
+		
+		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+			throw TaskServiceError.invalidData
+		}
+		
+		let task = try JSONDecoder().decode(TaskUnity.self, from: data)
+		return task
 	}
 				
 	func deleteTask(with id: String) async throws -> TaskUnity {
