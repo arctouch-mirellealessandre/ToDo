@@ -27,8 +27,8 @@ struct AddTaskView: View {
 	@State var dueDate: String
 		
 	init(viewModel: AddTaskViewModel) {
-		let description = ""
-		let dueDate = ""
+		let description = "Do something"
+		let dueDate = "10/07/2024"
 		self.addTaskViewModel = viewModel
 		self.description = description
 		self.dueDate = dueDate

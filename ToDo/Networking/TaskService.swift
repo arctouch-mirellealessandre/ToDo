@@ -53,7 +53,7 @@ final class TaskService: ObservableObject {
 		return tasks
 	}
 	
-	func addNewTask(description: String, dueDate: String) async throws -> TaskUnity {
+	func addNewTask(description: String, dueDate: String) async throws {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks") else {
 			throw TaskServiceError.invalidURL
 		}
@@ -73,7 +73,6 @@ final class TaskService: ObservableObject {
 		}
 		
 		let task = try JSONDecoder().decode(TaskUnity.self, from: data)
-		return task
 	}
 				
 	func deleteTask(with id: String) async throws -> TaskUnity {
