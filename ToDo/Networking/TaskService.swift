@@ -43,8 +43,12 @@ final class TaskService: ObservableObject {
 		}
 		var request = headersRequest(url)
 		request.httpMethod = "GET"
-		let (data, _) = try! await URLSession.shared.data(for: request)
-		let tasks = try! JSONDecoder().decode([TaskUnity].self, from: data)
+		
+		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+			throw TaskServiceError.invalidData
+		}
+		
+		let tasks = try JSONDecoder().decode([TaskUnity].self, from: data)
 		return tasks
 	}
 	
@@ -70,7 +74,7 @@ final class TaskService: ObservableObject {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks/" + "\(id)") else {
 			throw TaskServiceError.invalidURL
 		}
-		print(url)
+		
 		var request = headersRequest(url)
 		request.httpMethod = "DELETE"
 		let (data, _) = try! await URLSession.shared.data(for: request)

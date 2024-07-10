@@ -47,13 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		700905422C359AFE000F74AF /* DeleteTaskView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DeleteTaskView;
-			sourceTree = "<group>";
-		};
 		700D58942C38215000062863 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,7 +109,6 @@
 				70BAF9432BFF65980073AA23 /* LoginView */,
 				70C169542C0DF24E005CCC6C /* HomeView */,
 				7094CE622C2470560016F01B /* AddTaskView */,
-				700905422C359AFE000F74AF /* DeleteTaskView */,
 				70A298B32BED1944008C9A37 /* Preview Content */,
 			);
 			path = ToDo;
