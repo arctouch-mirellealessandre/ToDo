@@ -82,9 +82,12 @@ final class TaskService: ObservableObject {
 		
 		var request = headersRequest(url)
 		request.httpMethod = "DELETE"
-		let (data, _) = try! await URLSession.shared.data(for: request)
 		
-		let deletedTask = try! JSONDecoder().decode(TaskUnity.self, from: data)
+		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+			throw TaskServiceError.invalidData
+		}
+		
+		let deletedTask = try JSONDecoder().decode(TaskUnity.self, from: data)
 		return deletedTask
 	}
 	
