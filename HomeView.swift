@@ -31,7 +31,7 @@ final class HomeViewModel: ObservableObject {
 	func deleteTask(_ task: TaskUnity) {
 		Task {
 			do {
-				var deletedTask = try await taskService.deleteTask(with: task.id)
+				let deletedTask = try await taskService.deleteTask(with: task.id)
 				tasks.remove(at: tasks.firstIndex(of: deletedTask)!)
 			} catch {
 				print("TaskListRowView: couldn't deleteTask")
@@ -105,13 +105,12 @@ private struct TaskListRowView: View {
 			HStack {
 				Text("Due on \(task.userDateFormatter())")
 				Spacer()
-				Button {
-					homeViewModel.deleteTask(task)
-				} label: {
-					Image(systemName: "xmark.bin.circle.fill")
-						.foregroundStyle(.red)
-						.font(.system(size: 22))
-				}
+				Image(systemName: "xmark.bin.circle.fill")
+					.foregroundStyle(.red)
+					.font(.system(size: 22))
+					.onTapGesture {
+						homeViewModel.deleteTask(task)
+					}
 			}
 			.offset(x: 0, y: 10)
 		})

@@ -19,6 +19,7 @@ extension TaskUnity {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
 		let date = dateFormatter.date(from: self.dueDate)
+		
 		let isoFormatter = ISO8601DateFormatter()
 		isoFormatter.formatOptions = [.withFullDate]
 		let isoDate = isoFormatter.string(from: date!)
