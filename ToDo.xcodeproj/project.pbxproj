@@ -18,6 +18,7 @@
 		70A298B52BED1944008C9A37 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A298B42BED1944008C9A37 /* Preview Assets.xcassets */; };
 		70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BAF9442BFF65E70073AA23 /* LoginView.swift */; };
 		70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C169522C0DF22A005CCC6C /* HomeView.swift */; };
+		70E861B82C40155A00F5032A /* UpdateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E861B72C40155A00F5032A /* UpdateTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		70BAF9442BFF65E70073AA23 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		70C169522C0DF22A005CCC6C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		70CA107E2BFE339000366891 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		70E861B72C40155A00F5032A /* UpdateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				70BAF9432BFF65980073AA23 /* LoginView */,
 				70C169542C0DF24E005CCC6C /* HomeView */,
 				7094CE622C2470560016F01B /* AddTaskView */,
+				70E861B62C40151500F5032A /* UpdateTaskView */,
 				70A298B32BED1944008C9A37 /* Preview Content */,
 			);
 			path = ToDo;
@@ -137,6 +140,14 @@
 			);
 			name = HomeView;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		70E861B62C40151500F5032A /* UpdateTaskView */ = {
+			isa = PBXGroup;
+			children = (
+				70E861B72C40155A00F5032A /* UpdateTaskView.swift */,
+			);
+			path = UpdateTaskView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +226,7 @@
 				70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */,
 				70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */,
 				700D58962C38219800062863 /* TaskUnity.swift in Sources */,
+				70E861B82C40155A00F5032A /* UpdateTaskView.swift in Sources */,
 				700D58932C38213F00062863 /* NewTask.swift in Sources */,
 				70A298AE2BED1941008C9A37 /* ToDoApp.swift in Sources */,
 				7094CE642C2470AD0016F01B /* AddTaskView.swift in Sources */,
