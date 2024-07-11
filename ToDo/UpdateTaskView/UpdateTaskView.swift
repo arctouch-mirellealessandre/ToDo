@@ -11,12 +11,23 @@ import SwiftUI
 
 
 //MARK: ViewModel
-
+class UpdateTaskViewModel: ObservableObject {
+	var taskService: TaskService
+	
+	init(taskService: TaskService) {
+		self.taskService = taskService
+	}
+	
+	func updateTask(_ name: String, _ id: String) {
+		
+	}
+}
 
 //MARK: View
 struct UpdateTaskView: View {
 	@State var newName = ""
 	@State var newDate = ""
+	@ObservedObject var updateTaskViewModel: UpdateTaskViewModel
 	
     var body: some View {
 		VStack {
@@ -33,7 +44,7 @@ struct UpdateTaskView: View {
 				}
 			}
 			Button {
-				
+				updateTaskViewModel.updateTask(<#String#>, <#String#>)
 			} label: {
 				Text("Update task")
 			}
@@ -44,5 +55,5 @@ struct UpdateTaskView: View {
 }
 
 #Preview {
-    UpdateTaskView()
+    UpdateTaskView(updateTaskViewModel: UpdateTaskViewModel(taskService: TaskService(userManager: UserManager())))
 }

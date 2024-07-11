@@ -13,6 +13,8 @@ enum TaskServiceError: Error {
 	case invalidData
 	case invalidUser
 	case invalidNewTask
+	case invalidName
+	case invalidDueDate
 	case invalidDateFormat
 }
 
@@ -53,6 +55,29 @@ final class TaskService: ObservableObject {
 		return tasks
 	}
 	
+	func updateTaskName(_ name: String, _ dueDate: String, _ id: String) async throws {
+		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks" + "\(id)") else {
+			throw TaskServiceError.invalidURL
+		}
+		
+		let taskName = name
+		let dueDate = dueDate
+		
+		guard let jsonData = try? JSONEncoder().encode(taskName) else {
+			throw TaskServiceError.invalidName
+		}
+		
+		var request = headersRequest(url)
+		request.httpMethod = "PATCH"
+		request.httpBody = jsonData
+		
+		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
+			print("somethig's wrong with your request")
+			throw TaskServiceError.invalidData
+		}
+		print(String(decoding: data, as: UTF8.self))
+	}
+	
 	func addNewTask(description: String, dueDate: String) async throws {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks") else {
 			throw TaskServiceError.invalidURL
@@ -72,7 +97,7 @@ final class TaskService: ObservableObject {
 			throw TaskServiceError.invalidData
 		}
 		
-		let task = try JSONDecoder().decode(TaskUnity.self, from: data)
+		let _ = try JSONDecoder().decode(TaskUnity.self, from: data)
 	}
 				
 	func deleteTask(with id: String) async throws -> TaskUnity {
