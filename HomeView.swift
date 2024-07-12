@@ -113,6 +113,8 @@ private struct TaskListRowView: View {
 					}
 			}
 			.offset(x: 0, y: 10)
+			Spacer()
+			NavigationLink("Edit", destination: UpdateTaskView(UpdateTaskViewModel(homeViewModel.taskService, task)))
 		})
 		.padding()
 	}

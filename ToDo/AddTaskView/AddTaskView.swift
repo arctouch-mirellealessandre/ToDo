@@ -22,9 +22,9 @@ class AddTaskViewModel: ObservableObject {
 
 //MARK: View
 struct AddTaskView: View {
-	@ObservedObject var addTaskViewModel: AddTaskViewModel
 	@State var description: String
 	@State var dueDate: String
+	@ObservedObject var addTaskViewModel: AddTaskViewModel
 		
 	init(viewModel: AddTaskViewModel) {
 		let description = "Do something"
