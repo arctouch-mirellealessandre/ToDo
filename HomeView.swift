@@ -1,10 +1,3 @@
-//
-//  HomeView.swift
-//  ToDo
-//
-//  Created by Mirelle Alessandre on 03/06/24.
-//
-
 import SwiftUI
 
 //MARK: ViewModel
@@ -31,10 +24,17 @@ final class HomeViewModel: ObservableObject {
 	func deleteTask(_ task: TaskUnity) {
 		Task {
 			do {
-				let deletedTask = try await taskService.deleteTask(with: task.id)
-				tasks.remove(at: tasks.firstIndex(of: deletedTask)!)
+				let task = try await taskService.deleteTask(with: task.id)
+				let taskIndex = tasks.firstIndex(of: task)
+				
+				guard let taskIndex = taskIndex else {
+					print("Delete Task Method: couldn't remove task from the array")
+					return
+				}
+				
+				tasks.remove(at: taskIndex)
 			} catch {
-				print("TaskListRowView: couldn't deleteTask")
+				print("Delete Task Method: couldn't delete task")
 			}
 		}
 	}
@@ -53,7 +53,7 @@ struct HomeView: View {
 		NavigationStack {
 			VStack {
 				List {
-					ForEach(homeViewModel.tasks, id: \.id) { task in
+					ForEach(homeViewModel.tasks, id: \.self) { task in
 						TaskListRowView(task: task, homeViewModel: homeViewModel)
 					}
 				}
@@ -103,7 +103,7 @@ private struct TaskListRowView: View {
 					}
 			}
 			HStack {
-				Text("Due on \(task.userDateFormatter())")
+				Text("Due on \(task.changeDateFormatToUser())")
 				Spacer()
 				Image(systemName: "xmark.bin.circle.fill")
 					.foregroundStyle(.red)
@@ -114,12 +114,9 @@ private struct TaskListRowView: View {
 			}
 			.offset(x: 0, y: 10)
 			Spacer()
-			NavigationLink("Edit", destination: UpdateTaskView(UpdateTaskViewModel(homeViewModel.taskService, task)))
+			NavigationLink("Edit", destination: UpdateTaskView(viewModel: UpdateTaskViewModel(taskService: homeViewModel.taskService, task: task)))
 		})
 		.padding()
 	}
 }
 
-//#Preview {
-//	HomeView(viewModel: HomeViewModel(taskService: TaskService())
-//}
