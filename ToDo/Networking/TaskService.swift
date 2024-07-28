@@ -1,10 +1,3 @@
-//
-//  TaskService.swift
-//  ToDo
-//
-//  Created by Mirelle Alessandre on 04/07/24.
-//
-
 import Foundation
 
 enum TaskServiceError: Error {
@@ -54,26 +47,39 @@ final class TaskService: ObservableObject {
 		return tasks
 	}
 	
-	func updateTask(_ task: TaskUnity) async throws {
+	func updateTask(task: TaskUnity, newDescription: String, newDueDate: String) async throws {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks/" + "\(task.id)") else {
 			throw TaskServiceError.invalidURL
 		}
 		
-		let changes = Changes(description: task.description, dueDate: task.dueDate)
+		var request = headersRequest(url)
+		request.httpMethod = "PATCH"
 		
+		let changes: TaskChanges
+		let descriptionChanged = task.description != newDescription
+		let dueDateChanged = task.dueDate != newDueDate
+		let jsonDateFormat = try changeDateFormatToServer(newDueDate)
+		
+		if descriptionChanged && dueDateChanged {
+			changes = TaskChanges(description: newDescription, dueDate: jsonDateFormat)
+		} else if !descriptionChanged {
+			changes = TaskChanges(dueDate: jsonDateFormat)
+		} else {
+			changes = TaskChanges(description: newDescription, dueDate: jsonDateFormat)
+		}
+
 		guard let jsonData = try? JSONEncoder().encode(changes) else {
 			throw TaskServiceError.invalidChanges
 		}
 		
-		var request = headersRequest(url)
-		request.httpMethod = "PATCH"
 		request.httpBody = jsonData
 		
 		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
 			print("somethig's wrong with your request")
 			throw TaskServiceError.invalidData
 		}
-		print("Data: \(String(decoding: data, as: UTF8.self))")
+		
+		_ = try JSONDecoder().decode(TaskUnity.self, from: data)
 	}
 	
 	func addNewTask(description: String, dueDate: String) async throws {
@@ -81,7 +87,7 @@ final class TaskService: ObservableObject {
 			throw TaskServiceError.invalidURL
 		}
 		
-		let newTask = NewTask(description: description, dueDate: try jsonDateFormatter(dueDate))
+		let newTask = NewTask(description: description, dueDate: try changeDateFormatToServer(dueDate))
 		
 		guard let jsonData = try? JSONEncoder().encode(newTask) else {
 			throw TaskServiceError.invalidNewTask
@@ -116,9 +122,9 @@ final class TaskService: ObservableObject {
 }
 
 extension TaskService {
-	func jsonDateFormatter(_ stringDate: String) throws -> String {
+	func changeDateFormatToServer(_ stringDate: String) throws -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yy"
+		dateFormatter.dateFormat = "yy-MM-dd"
 		
 		guard let date = dateFormatter.date(from: stringDate) else {
 			throw TaskServiceError.invalidDateFormat
