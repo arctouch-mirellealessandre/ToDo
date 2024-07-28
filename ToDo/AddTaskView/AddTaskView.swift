@@ -27,8 +27,8 @@ struct AddTaskView: View {
 	@ObservedObject var addTaskViewModel: AddTaskViewModel
 		
 	init(viewModel: AddTaskViewModel) {
-		let description = "Do something"
-		let dueDate = "10/07/2024"
+		let description = "Go running"
+		let dueDate = "2024-07-25"
 		self.addTaskViewModel = viewModel
 		self.description = description
 		self.dueDate = dueDate
@@ -63,7 +63,3 @@ struct AddTaskView: View {
 		}
 	}
 }
-
-//#Preview {
-//	AddTaskView(viewModel: AddTaskViewModel(userManager: UserManager()))
-//}

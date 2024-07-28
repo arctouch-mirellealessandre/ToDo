@@ -1,13 +1,6 @@
-//
-//  TaskUnity.swift
-//  ToDo
-//
-//  Created by Mirelle Alessandre on 05/07/24.
-//
-
 import Foundation
 
-struct TaskUnity: Codable, Equatable {
+struct TaskUnity: Codable, Equatable, Hashable {
 	var dueDate: String
 	var description: String
 	let id: String
@@ -15,7 +8,7 @@ struct TaskUnity: Codable, Equatable {
 }
 
 extension TaskUnity {
-	func userDateFormatter() -> String {
+	func changeDateFormatToUser() -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
 		let date = dateFormatter.date(from: self.dueDate)
@@ -24,5 +17,5 @@ extension TaskUnity {
 		isoFormatter.formatOptions = [.withFullDate]
 		let isoDate = isoFormatter.string(from: date!)
 		return isoDate
-	}
+	}	
 }

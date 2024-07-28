@@ -1,10 +1,3 @@
-//
-//  LoginView.swift
-//  ToDo
-//
-//  Created by Mirelle Alessandre on 23/05/24.
-//
-
 import SwiftUI
 
 enum LoginRequest: Error {
@@ -91,7 +84,3 @@ struct LoginView: View {
 			}
 		}
 }
-
-//#Preview {
-//	LoginView(loginViewModel: LoginViewModel(userManager: UserManager()))
-//}

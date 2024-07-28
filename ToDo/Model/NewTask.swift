@@ -1,10 +1,3 @@
-//
-//  NewTask.swift
-//  ToDo
-//
-//  Created by Mirelle Alessandre on 05/07/24.
-//
-
 import Foundation
 
 struct NewTask: Codable {
