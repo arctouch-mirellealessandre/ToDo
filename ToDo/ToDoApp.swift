@@ -12,7 +12,7 @@ struct ToDoApp: App {
 		let taskService = TaskService(userManager: userManager)
 		self.userManager = userManager
 		self.taskService = taskService
-		self.loginViewModel = LoginViewModel(userManager: userManager)
+		self.loginViewModel = LoginViewModel(userManager: userManager, taskService: taskService)
 		self.homeViewModel = HomeViewModel(taskService: taskService)
 	}
 		

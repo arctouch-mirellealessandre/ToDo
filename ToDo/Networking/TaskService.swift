@@ -32,6 +32,27 @@ final class TaskService: ObservableObject {
 		return request
 	}
 	
+	func postLoginRequest(_ username: String, _ password: String) async throws {
+		guard let url = URL(string: "http://0.0.0.0:8080/v1/users/login") else {
+			throw LoginRequest.invalidURL
+		}
+		
+		var request = URLRequest(url: url)
+		request.httpMethod = "POST"
+		
+		let basicAuth = (username + ":" + password).data(using: .utf8)!.base64EncodedString()
+		request.addValue("Basic \(basicAuth)", forHTTPHeaderField: "Authorization")
+		
+		let (data, response) = try await URLSession.shared.data(for: request)
+		
+		guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+			throw LoginRequest.invalidResponse
+		}
+		
+		userManager.user = try JSONDecoder().decode(User.self, from: data)
+		userManager.updateUserState()
+	}
+	
 	func requestTasks() async throws -> [TaskUnity] {
 		guard let url = URL(string: "http://0.0.0.0:8080/v1/tasks") else {
 			throw TaskServiceError.invalidURL
@@ -63,7 +84,7 @@ final class TaskService: ObservableObject {
 		if descriptionChanged && dueDateChanged {
 			changes = TaskChanges(description: newDescription, dueDate: jsonDateFormat)
 		} else if !descriptionChanged {
-			changes = TaskChanges(dueDate: jsonDateFormat)
+			changes = TaskChanges(description: task.description, dueDate: jsonDateFormat)
 		} else {
 			changes = TaskChanges(description: newDescription, dueDate: jsonDateFormat)
 		}
