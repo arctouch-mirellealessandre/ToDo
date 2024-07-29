@@ -1,8 +1,28 @@
-//
-//  LoginViewModel.swift
-//  ToDo
-//
-//  Created by Mirelle Alessandre on 29/07/24.
-//
-
 import Foundation
+
+enum LoginRequest: Error {
+	case invalidURL
+	case invalidResponse
+}
+
+@MainActor
+final class LoginViewModel: ObservableObject {
+	private var userManager: UserManager
+	private var taskService: TaskService
+	
+	init(userManager: UserManager, taskService: TaskService) {
+		self.userManager = userManager
+		self.taskService = taskService
+	}
+		
+	func requestLogin(_ username: String, _ password: String) {
+		Task {
+			do {
+				try await taskService.postLoginRequest(username, password)
+			} catch {
+				print("Login attempt failed.")
+			}
+		}
+		
+	}
+}
