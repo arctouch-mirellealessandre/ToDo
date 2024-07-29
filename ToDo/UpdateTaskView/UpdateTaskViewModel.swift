@@ -10,9 +10,6 @@ class UpdateTaskViewModel: ObservableObject {
 	}
 	
 	func updateTask(newDescription: String, newDueDate: String) {
-		print("New description: \(newDescription)")
-		print("Task description: \(task.description)")
-		
 		Task {
 			do {
 				try await taskService.updateTask(task: task, newDescription: newDescription, newDueDate: newDueDate)
