@@ -10,6 +10,8 @@ final class LoginViewModel: ObservableObject {
 	private var userManager: UserManager
 	private var taskService: TaskService
 	
+	@Published var isLoading = false
+	
 	init(userManager: UserManager, taskService: TaskService) {
 		self.userManager = userManager
 		self.taskService = taskService
@@ -23,6 +25,6 @@ final class LoginViewModel: ObservableObject {
 				print("Login attempt failed.")
 			}
 		}
-		
+		isLoading = false
 	}
 }

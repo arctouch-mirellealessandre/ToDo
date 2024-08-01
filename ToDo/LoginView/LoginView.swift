@@ -4,7 +4,7 @@ struct LoginView: View {
 	@State private var username: String
 	@State private var password: String
 	@ObservedObject var loginViewModel: LoginViewModel
-
+	
 	init(viewModel: LoginViewModel) {
 		self.username = "john.doe"
 		self.password = "123456789"
@@ -29,14 +29,33 @@ struct LoginView: View {
 					TextField("", text: $password)
 						.textInputAutocapitalization(.never)
 				} header: {
-					 Text("Password")
+					Text("Password")
 				}
 			}
-			Button("Login") {
+			Button {
+				loginViewModel.isLoading = true
 				loginViewModel.requestLogin(username, password)
-				}
+			} label: {
+				Text("Login")
+			}
 			.buttonStyle(.borderedProminent)
 			.offset(x: 0, y: -100)
+			
+			if loginViewModel.isLoading {
+				LoadingView()
 			}
 		}
+	}
+}
+
+//MARK: LOADING VIEW
+struct LoadingView: View {
+	var body: some View {
+		ZStack {
+			Color(.systemBackground)
+				.ignoresSafeArea()
+			ProgressView("Loading...")
+				.scaleEffect(1)
+		}
+	}
 }
