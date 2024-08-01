@@ -1,8 +1,8 @@
 import Foundation
 
 struct TaskChanges: Encodable {
-	let description: String
-	let dueDate: String
+	let description: String?
+	let dueDate: String?
 	
 	init(description: String, dueDate: String) {
 		self.description = description
@@ -11,11 +11,11 @@ struct TaskChanges: Encodable {
 	
 	init(description: String) {
 		self.description = description
-		dueDate = ""
+		dueDate = nil
 	}
 	
 	init(dueDate: String) {
-		description = ""
+		description = nil
 		self.dueDate = dueDate
 	}
 }

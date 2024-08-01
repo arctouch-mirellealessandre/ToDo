@@ -83,10 +83,12 @@ final class TaskService: ObservableObject {
 		
 		if descriptionChanged && dueDateChanged {
 			changes = TaskChanges(description: newDescription, dueDate: jsonDateFormat)
-		} else if !descriptionChanged {
-			changes = TaskChanges(description: task.description, dueDate: jsonDateFormat)
+		} else if descriptionChanged {
+			changes = TaskChanges(description: newDescription)
+		} else if dueDateChanged {
+			changes = TaskChanges(dueDate: jsonDateFormat)
 		} else {
-			changes = TaskChanges(description: newDescription, dueDate: jsonDateFormat)
+			throw TaskServiceError.invalidChanges
 		}
 
 		guard let jsonData = try? JSONEncoder().encode(changes) else {
@@ -96,7 +98,6 @@ final class TaskService: ObservableObject {
 		request.httpBody = jsonData
 		
 		guard let (data, _) = try? await URLSession.shared.data(for: request) else {
-			print("somethig's wrong with your request")
 			throw TaskServiceError.invalidData
 		}
 		
