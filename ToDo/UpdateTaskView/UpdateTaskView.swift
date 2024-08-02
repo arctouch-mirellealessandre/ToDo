@@ -12,7 +12,7 @@ struct UpdateTaskView: View {
 	}
 	
     var body: some View {
-		VStack {
+		ZStack {
 			Form() {
 				Section {
 					TextField("Description", text: $description)
@@ -26,13 +26,17 @@ struct UpdateTaskView: View {
 				}
 			}
 			Button {
+				updateTaskViewModel.isUpdatingTask = true
 				updateTaskViewModel.updateTask(newDescription: description, newDueDate: dueDate)
-				
 			} label: {
 				Text("Update task")
 			}
 			.buttonStyle(.borderedProminent)
-			.offset(x: 0, y: -480)
+			.offset(x: 0, y: -100)
+			
+			if updateTaskViewModel.isUpdatingTask {
+				LoadingView(message: "Updating task")
+			}
 		}
     }
 }
