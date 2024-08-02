@@ -15,12 +15,14 @@
 		7064B2852C36E75400B852ED /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7064B2842C36E75400B852ED /* TaskService.swift */; };
 		7064B28A2C36E80500B852ED /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7064B2892C36E80500B852ED /* UserManager.swift */; };
 		708E1BA62C3813F400E00FF1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E1BA52C3813F400E00FF1 /* UserService.swift */; };
+		7093437E2C5D2963008D55B4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093437D2C5D2963008D55B4 /* LoadingView.swift */; };
 		7094CE642C2470AD0016F01B /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7094CE632C2470AD0016F01B /* AddTaskView.swift */; };
 		70A298AE2BED1941008C9A37 /* ToDoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A298AD2BED1941008C9A37 /* ToDoApp.swift */; };
 		70A298B22BED1944008C9A37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A298B12BED1944008C9A37 /* Assets.xcassets */; };
 		70A298B52BED1944008C9A37 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A298B42BED1944008C9A37 /* Preview Assets.xcassets */; };
 		70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BAF9442BFF65E70073AA23 /* LoginView.swift */; };
 		70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C169522C0DF22A005CCC6C /* HomeView.swift */; };
+		70DFAEB22C5BCFFA00D96210 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DFAEB12C5BCFFA00D96210 /* LoadingView.swift */; };
 		70E861B82C40155A00F5032A /* UpdateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E861B72C40155A00F5032A /* UpdateTaskView.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,7 @@
 		7064B2842C36E75400B852ED /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
 		7064B2892C36E80500B852ED /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		708E1BA52C3813F400E00FF1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		7093437D2C5D2963008D55B4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7094CE632C2470AD0016F01B /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		70A298AA2BED1941008C9A37 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A298AD2BED1941008C9A37 /* ToDoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoApp.swift; sourceTree = "<group>"; };
@@ -41,6 +44,7 @@
 		70BAF9442BFF65E70073AA23 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		70C169522C0DF22A005CCC6C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		70CA107E2BFE339000366891 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		70DFAEB12C5BCFFA00D96210 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		70E861B72C40155A00F5032A /* UpdateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,7 +116,9 @@
 				70CA107E2BFE339000366891 /* Info.plist */,
 				70A298B12BED1944008C9A37 /* Assets.xcassets */,
 				70A298AD2BED1941008C9A37 /* ToDoApp.swift */,
+				70DFAEB12C5BCFFA00D96210 /* LoadingView.swift */,
 				7064B2832C36DFF200B852ED /* Networking */,
+				70DFAEAE2C5BCBB600D96210 /* Progress Indicators */,
 				7064B2882C36E77E00B852ED /* Manager */,
 				700D58942C38215000062863 /* Model */,
 				70BAF9432BFF65980073AA23 /* LoginView */,
@@ -148,6 +154,14 @@
 			);
 			name = HomeView;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		70DFAEAE2C5BCBB600D96210 /* Progress Indicators */ = {
+			isa = PBXGroup;
+			children = (
+				7093437D2C5D2963008D55B4 /* LoadingView.swift */,
+			);
+			path = "Progress Indicators";
 			sourceTree = "<group>";
 		};
 		70E861B62C40151500F5032A /* UpdateTaskView */ = {
@@ -234,8 +248,10 @@
 				7064B28A2C36E80500B852ED /* UserManager.swift in Sources */,
 				70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */,
 				70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */,
+				70DFAEB22C5BCFFA00D96210 /* LoadingView.swift in Sources */,
 				700D58962C38219800062863 /* TaskUnity.swift in Sources */,
 				70E861B82C40155A00F5032A /* UpdateTaskView.swift in Sources */,
+				7093437E2C5D2963008D55B4 /* LoadingView.swift in Sources */,
 				700D58932C38213F00062863 /* NewTask.swift in Sources */,
 				70451D2E2C57B4F700FF6A13 /* LoginViewModel.swift in Sources */,
 				70A298AE2BED1941008C9A37 /* ToDoApp.swift in Sources */,

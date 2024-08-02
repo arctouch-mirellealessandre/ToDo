@@ -42,20 +42,8 @@ struct LoginView: View {
 			.offset(x: 0, y: -100)
 			
 			if loginViewModel.isLoading {
-				LoadingView()
+				LoadingView(message: "Loading")
 			}
-		}
-	}
-}
-
-//MARK: LOADING VIEW
-struct LoadingView: View {
-	var body: some View {
-		ZStack {
-			Color(.systemBackground)
-				.ignoresSafeArea()
-			ProgressView("Loading...")
-				.scaleEffect(1)
 		}
 	}
 }
