@@ -3,7 +3,7 @@ import SwiftUI
 struct LoginView: View {
 	@State private var username: String
 	@State private var password: String
-	@ObservedObject var loginViewModel: LoginViewModel
+	@ObservedObject private var loginViewModel: LoginViewModel
 	
 	private var loadingMessage = "Loading..."
 	
