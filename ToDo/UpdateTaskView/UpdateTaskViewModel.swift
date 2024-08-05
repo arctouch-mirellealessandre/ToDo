@@ -1,6 +1,6 @@
 import Foundation
 
-class UpdateTaskViewModel: ObservableObject {
+final class UpdateTaskViewModel: ObservableObject {
 	var taskService: TaskService
 	var task: TaskUnity
 	
@@ -19,6 +19,6 @@ class UpdateTaskViewModel: ObservableObject {
 				print("UpdateTaskViewModel: something's wrong with updateTask method")
 			}
 		}
-	isUpdatingTask = false
+		isUpdatingTask = false
 	}
 }
