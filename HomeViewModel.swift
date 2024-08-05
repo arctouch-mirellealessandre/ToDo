@@ -19,23 +19,4 @@ final class HomeViewModel: ObservableObject {
 			}
 		}
 	}
-	
-	func deleteTask(_ task: TaskUnity) {
-		Task {
-			do {
-				let task = try await taskService.deleteTask(with: task.id)
-				let taskIndex = tasks.firstIndex(of: task)
-				
-				guard let taskIndex = taskIndex else {
-					print("Delete Task Method: couldn't remove task from the array")
-					return
-				}
-				
-				tasks.remove(at: taskIndex)
-			} catch {
-				print("Delete Task Method: couldn't delete task")
-			}
-		}
-	}
-	
 }

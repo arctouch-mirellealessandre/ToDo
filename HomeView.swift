@@ -39,11 +39,15 @@ struct HomeView: View {
 
 private struct TaskListRowView: View {
 	@State var task: TaskUnity
+	//TODO: Por que esse homeViewModel é um ObservedObject aqui?
 	@ObservedObject var homeViewModel: HomeViewModel
+	
+	var deleteTaskViewModel: DeleteTaskViewModel
 	
 	init(task: TaskUnity, homeViewModel: HomeViewModel) {
 		self.task = task
 		self.homeViewModel = homeViewModel
+		self.deleteTaskViewModel = DeleteTaskViewModel(taskService: homeViewModel.taskService, homeViewModel: homeViewModel)
 	}
 	
 	var body: some View {
@@ -63,12 +67,7 @@ private struct TaskListRowView: View {
 			HStack {
 				Text("Due on \(task.changeDateFormatToUser())")
 				Spacer()
-				Image(systemName: "xmark.bin.circle.fill")
-					.foregroundStyle(.red)
-					.font(.system(size: 22))
-					.onTapGesture {
-						homeViewModel.deleteTask(task)
-					}
+				DeleteTaskView(task: task, deleteTaskViewModel: deleteTaskViewModel)
 			}
 			.offset(x: 0, y: 10)
 			Spacer()
@@ -77,4 +76,3 @@ private struct TaskListRowView: View {
 		.padding()
 	}
 }
-
