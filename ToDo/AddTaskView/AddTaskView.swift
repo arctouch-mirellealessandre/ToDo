@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct AddTaskView: View {
-	@State var description: String
-	@State var dueDate: String
-	@ObservedObject var addTaskViewModel: AddTaskViewModel
+	@State private var description: String
+	@State private var dueDate: String
+	@ObservedObject private var addTaskViewModel: AddTaskViewModel
 	
 	private var loadingMessage = "Adding task..."
 		

@@ -1,7 +1,7 @@
 import Foundation
 
 @MainActor
-class AddTaskViewModel: ObservableObject {
+final class AddTaskViewModel: ObservableObject {
 	var taskService: TaskService
 	
 	@Published var isAddingNewTask = false
