@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LoadingView: View {
-	var message: String
+	private var message: String
 	
 	init(message: String) {
 		self.message = message
@@ -11,7 +11,7 @@ struct LoadingView: View {
 		ZStack {
 			Color(.systemBackground)
 				.ignoresSafeArea()
-			ProgressView(message+"...")
+			ProgressView(message)
 				.scaleEffect(1)
 		}
 	}
