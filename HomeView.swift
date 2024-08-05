@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
-	@ObservedObject var homeViewModel: HomeViewModel
+	@ObservedObject private var homeViewModel: HomeViewModel
 	
 	private var loadingMessage = "Requesting tasks..."
 	
@@ -44,9 +44,10 @@ struct HomeView: View {
 private struct TaskListRowView: View {
 	@State var task: TaskUnity
 	//TODO: Por que esse homeViewModel é um ObservedObject aqui?
-	@ObservedObject var homeViewModel: HomeViewModel
+		//porque precisamos observar as mudanças que ocorrem em tasks ?
+	@ObservedObject private var homeViewModel: HomeViewModel
 	
-	var deleteTaskViewModel: DeleteTaskViewModel
+	private var deleteTaskViewModel: DeleteTaskViewModel
 	
 	init(task: TaskUnity, homeViewModel: HomeViewModel) {
 		self.task = task
