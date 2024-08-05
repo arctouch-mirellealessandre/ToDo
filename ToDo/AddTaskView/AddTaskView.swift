@@ -4,6 +4,8 @@ struct AddTaskView: View {
 	@State var description: String
 	@State var dueDate: String
 	@ObservedObject var addTaskViewModel: AddTaskViewModel
+	
+	private var loadingMessage = "Adding task..."
 		
 	init(viewModel: AddTaskViewModel) {
 		let description = "Go running"
@@ -42,7 +44,7 @@ struct AddTaskView: View {
 			.offset(x: 0, y: -100)
 			
 			if addTaskViewModel.isAddingNewTask {
-				LoadingView(message: "Adding task")
+				LoadingView(message: loadingMessage)
 			}
 		}
 	}

@@ -4,11 +4,10 @@ import Foundation
 class AddTaskViewModel: ObservableObject {
 	var taskService: TaskService
 	
-	@Published var isAddingNewTask: Bool
+	@Published var isAddingNewTask = false
 	
 	init(taskService: TaskService) {
 		self.taskService = taskService
-		self.isAddingNewTask = false
 	}
 	
 	func addNewTask(_ description: String, _ dueDate: String) {
