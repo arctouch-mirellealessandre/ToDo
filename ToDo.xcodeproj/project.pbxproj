@@ -14,6 +14,9 @@
 		70451D302C57B50A00FF6A13 /* UpdateTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70451D2F2C57B50A00FF6A13 /* UpdateTaskViewModel.swift */; };
 		7064B2852C36E75400B852ED /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7064B2842C36E75400B852ED /* TaskService.swift */; };
 		7064B28A2C36E80500B852ED /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7064B2892C36E80500B852ED /* UserManager.swift */; };
+		7083F1D52C61056900974BC2 /* LoadingCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7083F1D42C61056900974BC2 /* LoadingCustomView.swift */; };
+		7083F1D82C61089F00974BC2 /* DeleteTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7083F1D72C61089F00974BC2 /* DeleteTaskView.swift */; };
+		7083F1DA2C61093E00974BC2 /* DeleteTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7083F1D92C61093E00974BC2 /* DeleteTaskViewModel.swift */; };
 		708E1BA62C3813F400E00FF1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E1BA52C3813F400E00FF1 /* UserService.swift */; };
 		7093437E2C5D2963008D55B4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093437D2C5D2963008D55B4 /* LoadingView.swift */; };
 		709343802C5D2A91008D55B4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093437F2C5D2A91008D55B4 /* HomeViewModel.swift */; };
@@ -24,7 +27,6 @@
 		70A298B52BED1944008C9A37 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70A298B42BED1944008C9A37 /* Preview Assets.xcassets */; };
 		70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BAF9442BFF65E70073AA23 /* LoginView.swift */; };
 		70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C169522C0DF22A005CCC6C /* HomeView.swift */; };
-		70DFAEB22C5BCFFA00D96210 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DFAEB12C5BCFFA00D96210 /* LoadingView.swift */; };
 		70E861B82C40155A00F5032A /* UpdateTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E861B72C40155A00F5032A /* UpdateTaskView.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,9 @@
 		70451D2F2C57B50A00FF6A13 /* UpdateTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskViewModel.swift; sourceTree = "<group>"; };
 		7064B2842C36E75400B852ED /* TaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskService.swift; sourceTree = "<group>"; };
 		7064B2892C36E80500B852ED /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		7083F1D42C61056900974BC2 /* LoadingCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCustomView.swift; sourceTree = "<group>"; };
+		7083F1D72C61089F00974BC2 /* DeleteTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTaskView.swift; sourceTree = "<group>"; };
+		7083F1D92C61093E00974BC2 /* DeleteTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTaskViewModel.swift; sourceTree = "<group>"; };
 		708E1BA52C3813F400E00FF1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		7093437D2C5D2963008D55B4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7093437F2C5D2A91008D55B4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -48,7 +53,6 @@
 		70BAF9442BFF65E70073AA23 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		70C169522C0DF22A005CCC6C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		70CA107E2BFE339000366891 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		70DFAEB12C5BCFFA00D96210 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		70E861B72C40155A00F5032A /* UpdateTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +94,15 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		7083F1D62C61086800974BC2 /* DeleteTaskView */ = {
+			isa = PBXGroup;
+			children = (
+				7083F1D72C61089F00974BC2 /* DeleteTaskView.swift */,
+				7083F1D92C61093E00974BC2 /* DeleteTaskViewModel.swift */,
+			);
+			path = DeleteTaskView;
+			sourceTree = "<group>";
+		};
 		7094CE622C2470560016F01B /* AddTaskView */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +134,7 @@
 				70CA107E2BFE339000366891 /* Info.plist */,
 				70A298B12BED1944008C9A37 /* Assets.xcassets */,
 				70A298AD2BED1941008C9A37 /* ToDoApp.swift */,
-				70DFAEB12C5BCFFA00D96210 /* LoadingView.swift */,
+				7083F1D42C61056900974BC2 /* LoadingCustomView.swift */,
 				7064B2832C36DFF200B852ED /* Networking */,
 				70DFAEAE2C5BCBB600D96210 /* Progress Indicators */,
 				7064B2882C36E77E00B852ED /* Manager */,
@@ -130,6 +143,7 @@
 				70C169542C0DF24E005CCC6C /* HomeView */,
 				7094CE622C2470560016F01B /* AddTaskView */,
 				70E861B62C40151500F5032A /* UpdateTaskView */,
+				7083F1D62C61086800974BC2 /* DeleteTaskView */,
 				70A298B32BED1944008C9A37 /* Preview Content */,
 			);
 			path = ToDo;
@@ -256,13 +270,15 @@
 				70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */,
 				709343822C5D2B11008D55B4 /* AddTaskViewModel.swift in Sources */,
 				70BAF9452BFF65E70073AA23 /* LoginView.swift in Sources */,
-				70DFAEB22C5BCFFA00D96210 /* LoadingView.swift in Sources */,
 				700D58962C38219800062863 /* TaskUnity.swift in Sources */,
 				70E861B82C40155A00F5032A /* UpdateTaskView.swift in Sources */,
+				7083F1D52C61056900974BC2 /* LoadingCustomView.swift in Sources */,
+				7083F1DA2C61093E00974BC2 /* DeleteTaskViewModel.swift in Sources */,
 				7093437E2C5D2963008D55B4 /* LoadingView.swift in Sources */,
 				700D58932C38213F00062863 /* NewTask.swift in Sources */,
 				70451D2E2C57B4F700FF6A13 /* LoginViewModel.swift in Sources */,
 				70A298AE2BED1941008C9A37 /* ToDoApp.swift in Sources */,
+				7083F1D82C61089F00974BC2 /* DeleteTaskView.swift in Sources */,
 				70451D2C2C56736600FF6A13 /* TaskChanges.swift in Sources */,
 				70451D302C57B50A00FF6A13 /* UpdateTaskViewModel.swift in Sources */,
 				7094CE642C2470AD0016F01B /* AddTaskView.swift in Sources */,
