@@ -5,6 +5,8 @@ struct LoginView: View {
 	@State private var password: String
 	@ObservedObject var loginViewModel: LoginViewModel
 	
+	private var loadingMessage = "Loading..."
+	
 	init(viewModel: LoginViewModel) {
 		self.username = "john.doe"
 		self.password = "123456789"
@@ -42,7 +44,7 @@ struct LoginView: View {
 			.offset(x: 0, y: -100)
 			
 			if loginViewModel.isLoading {
-				LoadingView(message: "Loading")
+				LoadingView(message: loadingMessage)
 			}
 		}
 	}
