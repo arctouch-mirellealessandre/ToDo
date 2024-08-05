@@ -3,17 +3,17 @@ import SwiftUI
 struct HomeView: View {
 	@ObservedObject var homeViewModel: HomeViewModel
 	
+	private var loadingMessage = "Requesting tasks..."
+	
 	init(viewModel: HomeViewModel) {
 		self.homeViewModel = viewModel
 	}
 	
 	var body: some View {
 		NavigationStack {
-			VStack {
-				List {
-					ForEach(homeViewModel.tasks, id: \.self) { task in
-						TaskListRowView(task: task, homeViewModel: homeViewModel)
-					}
+			List {
+				ForEach(homeViewModel.tasks, id: \.self) { task in
+					TaskListRowView(task: task, homeViewModel: homeViewModel)
 				}
 			}
 			NavigationLink(destination: {
@@ -23,6 +23,7 @@ struct HomeView: View {
 			})
 			.buttonStyle(.borderedProminent)
 			.task {
+				homeViewModel.isRequestingTasks = true
 				homeViewModel.requestTasks()
 			}
 			.navigationBarTitleDisplayMode(.inline)
@@ -32,6 +33,9 @@ struct HomeView: View {
 						.font(.largeTitle.bold())
 						.accessibilityAddTraits(.isHeader)
 				}
+			}
+			if homeViewModel.isRequestingTasks {
+				LoadingView(message: loadingMessage)
 			}
 		}
 	}

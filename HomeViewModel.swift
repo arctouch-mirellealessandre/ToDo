@@ -2,10 +2,11 @@ import Foundation
 
 @MainActor
 final class HomeViewModel: ObservableObject {
-	@Published var tasks = [TaskUnity]()
-	
 	var taskService: TaskService
-		
+	
+	@Published var tasks = [TaskUnity]()
+	@Published var isRequestingTasks = false
+			
 	init(taskService: TaskService) {
 		self.taskService = taskService
 	}
@@ -18,5 +19,6 @@ final class HomeViewModel: ObservableObject {
 				print("Couldn't request tasks")
 			}
 		}
+		isRequestingTasks = false
 	}
 }
