@@ -5,6 +5,8 @@ final class DeleteTaskViewModel {
 	var taskService: TaskService
 	var homeViewModel: HomeViewModel
 	
+	@Published var isDeletingTask = false
+	
 	init(taskService: TaskService, homeViewModel: HomeViewModel) {
 		self.taskService = taskService
 		self.homeViewModel = homeViewModel
@@ -26,5 +28,6 @@ final class DeleteTaskViewModel {
 				print("Delete Task Method: couldn't delete task")
 			}
 		}
+		isDeletingTask = false
 	}
 }
