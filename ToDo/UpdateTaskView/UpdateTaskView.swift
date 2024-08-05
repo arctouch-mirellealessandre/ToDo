@@ -5,6 +5,8 @@ struct UpdateTaskView: View {
 	@State var dueDate: String
 	@ObservedObject var updateTaskViewModel: UpdateTaskViewModel
 	
+	private var loadingMessage = "Updating task..."
+	
 	init(viewModel: UpdateTaskViewModel) {
 		self.description = viewModel.task.description
 		self.dueDate = viewModel.task.changeDateFormatToUser()
@@ -35,7 +37,7 @@ struct UpdateTaskView: View {
 			.offset(x: 0, y: -100)
 			
 			if updateTaskViewModel.isUpdatingTask {
-				LoadingView(message: "Updating task")
+				LoadingView(message: loadingMessage)
 			}
 		}
     }
