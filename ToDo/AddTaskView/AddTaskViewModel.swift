@@ -1,8 +1,7 @@
 import Foundation
 
-@MainActor
 final class AddTaskViewModel: ObservableObject {
-	var taskService: TaskService
+	private var taskService: TaskService
 	
 	@Published var isAddingNewTask = false
 	
@@ -17,7 +16,9 @@ final class AddTaskViewModel: ObservableObject {
 			} catch {
 				print("Error: couldn't add new task")
 			}
+			await MainActor.run {
+				isAddingNewTask = false
+			}
 		}
-		isAddingNewTask = false
 	}
 }
