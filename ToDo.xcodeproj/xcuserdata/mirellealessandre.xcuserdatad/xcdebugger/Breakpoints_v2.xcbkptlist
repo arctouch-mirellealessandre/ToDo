@@ -50,64 +50,6 @@
             endingLineNumber = "100"
             landmarkName = "updateTask(task:newDescription:newDueDate:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "067758BD-52F6-441F-9DE0-3A4A41B6A75B - 116853048feddc76"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for ToDo.TaskService.updateTask(task: ToDo.TaskUnity, newDescription: Swift.String, newDueDate: Swift.String) async throws -&gt; ()"
-                  moduleName = "ToDo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mirellealessandre/Desktop/Mateus/SwiftUI/ToDo/ToDo/Networking/TaskService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100">
-               </Location>
-               <Location
-                  uuid = "067758BD-52F6-441F-9DE0-3A4A41B6A75B - 6e1ddf28c3c8c5d5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for ToDo.TaskService.updateTask(task: ToDo.TaskUnity, newDescription: Swift.String, newDueDate: Swift.String) async throws -&gt; ()"
-                  moduleName = "ToDo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mirellealessandre/Desktop/Mateus/SwiftUI/ToDo/ToDo/Networking/TaskService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100">
-               </Location>
-               <Location
-                  uuid = "067758BD-52F6-441F-9DE0-3A4A41B6A75B - c44311ed8c5f5814"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for ToDo.TaskService.updateTask(task: ToDo.TaskUnity, newDescription: Swift.String, newDueDate: Swift.String) async throws -&gt; ()"
-                  moduleName = "ToDo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mirellealessandre/Desktop/Mateus/SwiftUI/ToDo/ToDo/Networking/TaskService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100">
-               </Location>
-               <Location
-                  uuid = "067758BD-52F6-441F-9DE0-3A4A41B6A75B - 1237b0820a099a03"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for ToDo.TaskService.updateTask(task: ToDo.TaskUnity, newDescription: Swift.String, newDueDate: Swift.String) async throws -&gt; ()"
-                  moduleName = "ToDo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mirellealessandre/Desktop/Mateus/SwiftUI/ToDo/ToDo/Networking/TaskService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct DeleteTaskView: View {
-	var task: TaskUnity
-	var deleteTaskViewModel: DeleteTaskViewModel
+	private var task: TaskUnity
+	private var deleteTaskViewModel: DeleteTaskViewModel
 	
 	private var loadingMessage = "Deleting task..."
 
