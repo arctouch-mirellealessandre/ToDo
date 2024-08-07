@@ -5,7 +5,6 @@ enum LoginRequest: Error {
 	case invalidResponse
 }
 
-@MainActor
 final class LoginViewModel: ObservableObject {
 	private var userManager: UserManager
 	private var taskService: TaskService
@@ -24,7 +23,9 @@ final class LoginViewModel: ObservableObject {
 			} catch {
 				print("Login attempt failed.")
 			}
+			await MainActor.run {
+				isLoading = false
+			}
 		}
-		isLoading = false
 	}
 }
