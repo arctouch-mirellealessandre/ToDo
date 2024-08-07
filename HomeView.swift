@@ -11,20 +11,23 @@ struct HomeView: View {
 	
 	var body: some View {
 		NavigationStack {
-			List {
-				ForEach(homeViewModel.tasks, id: \.self) { task in
-					TaskListRowView(task: task, homeViewModel: homeViewModel)
+			ZStack {
+				VStack {
+					List {
+						ForEach(homeViewModel.tasks, id: \.self) { task in
+							TaskListRowView(task: task, homeViewModel: homeViewModel)
+						}
+					}
+					NavigationLink(destination: {
+						AddTaskView(viewModel: AddTaskViewModel(taskService: homeViewModel.taskService))
+					}, label: {
+						Text("Add New Task")
+					})
+					.buttonStyle(.borderedProminent)
 				}
-			}
-			NavigationLink(destination: {
-				AddTaskView(viewModel: AddTaskViewModel(taskService: homeViewModel.taskService))
-			}, label: {
-				Text("Add New Task")
-			})
-			.buttonStyle(.borderedProminent)
-			.task {
-				homeViewModel.isRequestingTasks = true
-				homeViewModel.requestTasks()
+				if homeViewModel.isRequestingTasks {
+					LoadingView(message: loadingMessage)
+				}
 			}
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
@@ -34,8 +37,9 @@ struct HomeView: View {
 						.accessibilityAddTraits(.isHeader)
 				}
 			}
-			if homeViewModel.isRequestingTasks {
-				LoadingView(message: loadingMessage)
+			.task {
+				homeViewModel.isRequestingTasks = true
+				homeViewModel.requestTasks()
 			}
 		}
 	}

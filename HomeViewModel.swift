@@ -18,7 +18,7 @@ final class HomeViewModel: ObservableObject {
 			} catch {
 				print("Couldn't request tasks")
 			}
+			isRequestingTasks = false
 		}
-		isRequestingTasks = false
 	}
 }
