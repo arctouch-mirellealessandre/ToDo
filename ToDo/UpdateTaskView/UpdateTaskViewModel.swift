@@ -1,7 +1,7 @@
 import Foundation
 
 final class UpdateTaskViewModel: ObservableObject {
-	var taskService: TaskService
+	private var taskService: TaskService
 	var task: TaskUnity
 	
 	@Published var isUpdatingTask = false
@@ -18,7 +18,9 @@ final class UpdateTaskViewModel: ObservableObject {
 			} catch {
 				print("UpdateTaskViewModel: something's wrong with updateTask method")
 			}
+			await MainActor.run {
+				isUpdatingTask = false
+			}
 		}
-		isUpdatingTask = false
 	}
 }
