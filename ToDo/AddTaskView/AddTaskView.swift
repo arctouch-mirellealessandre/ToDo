@@ -21,19 +21,12 @@ struct AddTaskView: View {
 				.bold()
 				.font(.system(size: 25))
 		}
-		ZStack() {
-			Form {
-				Section {
-					TextField("Description", text: $description)
-				} header: {
-					Text("Task")
-				}
-				Section {
-					TextField("Date", text: $dueDate)
-				} header: {
-					Text("Due Date")
-				}
-			}
+		ZStack {
+			TwoSectionsCustomForm(
+				firstTextFieldText: $description,
+				firstHeaderText: "Task",
+				secondTextFieldText: $dueDate,
+				secondHeaderText: "Due Date")
 			Button {
 				addTaskViewModel.isAddingNewTask = true
 				addTaskViewModel.addNewTask(description, dueDate)
