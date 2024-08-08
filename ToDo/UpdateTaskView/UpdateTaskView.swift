@@ -15,18 +15,11 @@ struct UpdateTaskView: View {
 	
     var body: some View {
 		ZStack {
-			Form() {
-				Section {
-					TextField("Description", text: $description)
-				} header: {
-					Text("Rename")
-				}
-				Section {
-					TextField("Date", text: $dueDate)
-				} header: {
-					Text("new date")
-				}
-			}
+			TwoSectionsCustomForm(
+				firstTextFieldText: $description,
+				firstHeaderText: "Rename",
+				secondTextFieldText: $dueDate,
+				secondHeaderText: "New date")
 			Button {
 				updateTaskViewModel.isUpdatingTask = true
 				updateTaskViewModel.updateTask(newDescription: description, newDueDate: dueDate)
