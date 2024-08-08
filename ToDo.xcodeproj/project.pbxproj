@@ -18,6 +18,7 @@
 		7083F1D82C61089F00974BC2 /* DeleteTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7083F1D72C61089F00974BC2 /* DeleteTaskView.swift */; };
 		7083F1DA2C61093E00974BC2 /* DeleteTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7083F1D92C61093E00974BC2 /* DeleteTaskViewModel.swift */; };
 		708E1BA62C3813F400E00FF1 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E1BA52C3813F400E00FF1 /* UserService.swift */; };
+		709218752C65084500FEF68D /* TwoSectionsCustomForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709218742C65084500FEF68D /* TwoSectionsCustomForm.swift */; };
 		7093437E2C5D2963008D55B4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093437D2C5D2963008D55B4 /* LoadingView.swift */; };
 		709343802C5D2A91008D55B4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7093437F2C5D2A91008D55B4 /* HomeViewModel.swift */; };
 		709343822C5D2B11008D55B4 /* AddTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709343812C5D2B11008D55B4 /* AddTaskViewModel.swift */; };
@@ -42,6 +43,7 @@
 		7083F1D72C61089F00974BC2 /* DeleteTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTaskView.swift; sourceTree = "<group>"; };
 		7083F1D92C61093E00974BC2 /* DeleteTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTaskViewModel.swift; sourceTree = "<group>"; };
 		708E1BA52C3813F400E00FF1 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		709218742C65084500FEF68D /* TwoSectionsCustomForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoSectionsCustomForm.swift; sourceTree = "<group>"; };
 		7093437D2C5D2963008D55B4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7093437F2C5D2A91008D55B4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		709343812C5D2B11008D55B4 /* AddTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewModel.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				70A298B12BED1944008C9A37 /* Assets.xcassets */,
 				70A298AD2BED1941008C9A37 /* ToDoApp.swift */,
 				7083F1D42C61056900974BC2 /* LoadingCustomView.swift */,
+				709218742C65084500FEF68D /* TwoSectionsCustomForm.swift */,
 				7064B2832C36DFF200B852ED /* Networking */,
 				70DFAEAE2C5BCBB600D96210 /* Progress Indicators */,
 				7064B2882C36E77E00B852ED /* Manager */,
@@ -266,6 +269,7 @@
 				708E1BA62C3813F400E00FF1 /* UserService.swift in Sources */,
 				7064B2852C36E75400B852ED /* TaskService.swift in Sources */,
 				7064B28A2C36E80500B852ED /* UserManager.swift in Sources */,
+				709218752C65084500FEF68D /* TwoSectionsCustomForm.swift in Sources */,
 				709343802C5D2A91008D55B4 /* HomeViewModel.swift in Sources */,
 				70C169532C0DF22A005CCC6C /* HomeView.swift in Sources */,
 				709343822C5D2B11008D55B4 /* AddTaskViewModel.swift in Sources */,

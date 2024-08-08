@@ -20,20 +20,11 @@ struct LoginView: View {
 				.font(.largeTitle)
 		}
 		ZStack {
-			Form {
-				Section() {
-					TextField("", text: $username)
-						.textInputAutocapitalization(.never)
-				} header: {
-					Text("Username")
-				}
-				Section() {
-					TextField("", text: $password)
-						.textInputAutocapitalization(.never)
-				} header: {
-					Text("Password")
-				}
-			}
+			TwoSectionsCustomForm(
+				firstTextFieldText: $username,
+				firstHeaderText: "Username",
+				secondTextFieldText: $password,
+				secondHeaderText: "Password")
 			Button {
 				loginViewModel.isLoading = true
 				loginViewModel.requestLogin(username, password)
