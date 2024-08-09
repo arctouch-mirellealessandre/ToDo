@@ -143,11 +143,11 @@
 				7064B2882C36E77E00B852ED /* Manager */,
 				700D58942C38215000062863 /* Model */,
 				70BAF9432BFF65980073AA23 /* LoginView */,
-				70C169542C0DF24E005CCC6C /* HomeView */,
 				7094CE622C2470560016F01B /* AddTaskView */,
 				70E861B62C40151500F5032A /* UpdateTaskView */,
 				7083F1D62C61086800974BC2 /* DeleteTaskView */,
 				70A298B32BED1944008C9A37 /* Preview Content */,
+				70C169542C0DF24E005CCC6C /* HomeView */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
