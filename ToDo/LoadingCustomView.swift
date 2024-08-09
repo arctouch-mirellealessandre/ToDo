@@ -3,7 +3,7 @@ import SwiftUI
 struct LoadingCustomView: View {
 	@State var show = false
 	
-    var body: some View {
+	var body: some View {
 		ZStack {
 			Button(action: {
 				show.toggle()
@@ -22,7 +22,7 @@ struct LoadingCustomView: View {
 				.opacity(0.45)
 			}
 		}
-    }
+	}
 }
 
 #Preview {
